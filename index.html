@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dram kit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="keys">
+        <div data-key="82" class="key">
+            <kbd>R</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="69" class="key">
+            <kbd>E</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="72" class="key">
+            <kbd>H</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="85" class="key">
+            <kbd>U</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div data-key="77" class="key">
+            <kbd>M</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <!-- <div deta-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+
+        <div deta-key="65" class="key">
+            <kbd>R</kbd>
+            <span class="sound">clap</span>
+        </div> -->
+    </div>
+<p>This is line one.
+    And this is line two.
+    </p>
+
+
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="82" src="sounds/boom.wav"></audio>
+    <audio data-key="75" src="sounds/hihat.wav"></audio>
+    <audio data-key="69" src="sounds/kick.wav"></audio>
+    <audio data-key="83" src="sounds/openhat.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="75" src="sounds/snare.wav"></audio>
+    <audio data-key="85" src="sounds/tink.wav"></audio>
+    <audio data-key="77" src="sounds/tom.wav"></audio>
+    <!-- <audio deta-key="65" src="sounds/clap.wav"></audio>
+    <audio deta-key="65" src="sounds/clap.wav"></audio> -->
+    
+
+    <script>
+        function removeTransition(e) {
+          if (e.propertyName !== 'transform') return;
+          e.target.classList.remove('playing');
+        }
+      
+        function playSound(e) {
+          const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+          const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+          if (!audio) return;
+      
+          key.classList.add('playing');
+          audio.currentTime = 0;
+          audio.play();
+        }
+      
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+        window.addEventListener('keydown', playSound);
+      </script>
+</body>
+</html>
